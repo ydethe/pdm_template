@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
-## [0.1.0](https://github.com/ydethe/pdm_template/releases/tag/v0.1.40.1.0) - 2024-03-14
+## Unreleased
+
+<small>[Compare with latest](https://github.com/ydethe/pdm_template/compare/v0.1.4...HEAD)</small>
+
+<!-- insertion marker -->
+## [v0.1.4](https://github.com/ydethe/pdm_template/releases/tag/v0.1.4) - 2024-03-14
 
 <small>[Compare with first commit](https://github.com/ydethe/pdm_template/compare/bbcc10fe2823b9822ace1a50967eeef8059e7d49...v0.1.4)</small>
 
