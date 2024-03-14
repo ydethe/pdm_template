@@ -1,3 +1,0 @@
-def poney():
-    """Fonction"""
-    pass

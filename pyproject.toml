@@ -7,7 +7,7 @@ name = "pdm_template"
 dynamic = ["version"]
 description = "A python project template"
 authors = [
-    { name = "Yann de Thé", email = "yann@johncloud.fr" },
+    { name = "Yann de Thé", email = "ydethe@gmail.com" },
 ]
 dependencies = [
     "git-changelog>=1.0",
@@ -33,9 +33,6 @@ fix-doc = "pdm_template.fix_doc:main"
 [tool.ruff]
 line-length = 100
 
-[tool.ruff.per-file-ignores]
-"GNSScodegen.py" = ["E501"]
-
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
@@ -54,9 +51,6 @@ testpaths = [
 source = "scm"
 
 [tool.pdm.build]
-includes = [
-    "pdm_template/",
-]
 excludes = [
     "tests",
     "examples",
@@ -87,7 +81,7 @@ quality = [
 doc = [
     "pdoc3~=0.10.0",
     "pylint~=2.15.3",
-    "pdm_template>=0.1.3",
+    "pdm_template>=0.1.4",
 ]
 test = [
     "pytest~=7.1.3",
