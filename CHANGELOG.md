@@ -6,15 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
-## Unreleased
+## [v0.1.3](https://github.com/ydethe/pdm_template/releases/tag/v0.1.3) - 2024-03-14
 
-<small>[Compare with latest](https://github.com/ydethe/pdm_template/compare/v0.1.2...HEAD)</small>
+<small>[Compare with v0.1.2](https://github.com/ydethe/pdm_template/compare/v0.1.2...v0.1.3)</small>
 
 ### Fixed
 
+- Fixed todo extraction ([edf85f9](https://github.com/ydethe/pdm_template/commit/edf85f95470bb76919c6b004012d7505228490c3) by Yann BLAUDIN DE THE).
 - Fixed package name ([0a84744](https://github.com/ydethe/pdm_template/commit/0a84744873c196bf5aa86cfac048c37513057850) by Yann BLAUDIN DE THE).
 
-<!-- insertion marker -->
 ## [v0.1.2](https://github.com/ydethe/pdm_template/releases/tag/v0.1.2) - 2024-03-14
 
 <small>[Compare with v0.1.1](https://github.com/ydethe/pdm_template/compare/v0.1.1...v0.1.2)</small>

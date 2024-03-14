@@ -87,7 +87,7 @@ quality = [
 doc = [
     "pdoc3~=0.10.0",
     "pylint~=2.15.3",
-    "pdm_template>=0.1.0",
+    "pdm_template>=0.1.3",
 ]
 test = [
     "pytest~=7.1.3",
