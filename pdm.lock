@@ -5,7 +5,7 @@
 groups = ["default", "dev", "doc", "maintain", "quality", "test"]
 strategy = ["cross_platform"]
 lock_version = "4.4.1"
-content_hash = "sha256:b899ec9fd4390e0173f9c8ea1c7c550d455ef20ea7e11689ed742f55950c1cb2"
+content_hash = "sha256:a2ba1f942e72adea4fd27623a8a2f2d5bc9e08aec35393bf338c16bf5a65ec34"
 
 [[package]]
 name = "appdirs"
