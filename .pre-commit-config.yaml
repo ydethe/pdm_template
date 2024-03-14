@@ -5,7 +5,7 @@ repos:
   # - id: extract-todo
   #   args: [--ignore, pyrat/export/highfive/**/*, --ignore, __pypackages__/**/*, --ignore, .venv/**/*]
   repo: https://github.com/ydethe/pdm_template.git
-  rev: v0.1.1
+  rev: v0.1.2
 
 - hooks:
   - id: check-case-conflict
