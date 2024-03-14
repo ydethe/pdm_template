@@ -29,7 +29,7 @@ pipx install copier
 Then:
 
 ```bash
-copier copy --trust https://github.com/ydethe/pytemplate.git /path/to/your/new/project
+copier copy --trust https://github.com/ydethe/pdm_template.git /path/to/your/new/project
 ```
 
 See the [documentation](https://copier.readthedocs.io/en/stable/)

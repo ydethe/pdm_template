@@ -4,7 +4,7 @@ repos:
     args: [--version-regex, '<a href="[^"]+">(?P<version>[^<]+)', --bump=auto, -t, keepachangelog]
   # - id: extract-todo
   #   args: [--ignore, pyrat/export/highfive/**/*, --ignore, __pypackages__/**/*, --ignore, .venv/**/*]
-  repo: https://github.com/ydethe/pytemplate.git
+  repo: https://github.com/ydethe/pdm_template.git
   rev: v0.1.0
 
 - hooks:

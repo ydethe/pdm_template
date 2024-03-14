@@ -21,11 +21,11 @@ def find_doc_index(doc_root: Path) -> Path:
 
 def copy_resource(dst: Path):
     import inspect
-    import pytemplate
+    import pdm_template
 
     index_pth = find_doc_index(dst)
 
-    pdm_copier_root = Path(inspect.getfile(pytemplate)).resolve().parent
+    pdm_copier_root = Path(inspect.getfile(pdm_template)).resolve().parent
     shutil.copytree(pdm_copier_root / "resource", index_pth, dirs_exist_ok=True)
 
     # logger.info(f"Scripts and styles copied to '{index_pth}'")

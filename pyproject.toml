@@ -3,7 +3,7 @@ requires = ["pdm-backend~=2.0.6"]
 build-backend = "pdm.backend"
 
 [project]
-name = "pytemplate"
+name = "pdm_template"
 dynamic = ["version"]
 description = "A python project template"
 authors = [
@@ -15,9 +15,9 @@ dependencies = [
 requires-python = ">=3.8"
 
 [project.urls]
-"Bug Tracker" = "https://github.com/ydethe/pytemplate/issues"
-Homepage = "https://github.com/ydethe/pytemplate"
-Source = "https://github.com/ydethe/pytemplate"
+"Bug Tracker" = "https://github.com/ydethe/pdm_template/issues"
+Homepage = "https://github.com/ydethe/pdm_template"
+Source = "https://github.com/ydethe/pdm_template"
 
 [tool.pylint.format]
 max-line-length = 100
@@ -26,9 +26,9 @@ max-line-length = 100
 line-length = 100
 
 [project.scripts]
-check-changelog = "pytemplate.check_changelog:main"
-extract-todo = "pytemplate.extract_todo:main"
-fix-doc = "pytemplate.fix_doc:main"
+check-changelog = "pdm_template.check_changelog:main"
+extract-todo = "pdm_template.extract_todo:main"
+fix-doc = "pdm_template.fix_doc:main"
 
 [tool.ruff]
 line-length = 100
@@ -43,7 +43,7 @@ addopts = [
     "--self-contained-html",
     "--junitxml=htmldoc/junit.xml",
     "--cov-config=tests/coverage.conf",
-    "--cov=pytemplate",
+    "--cov=pdm_template",
     "--doctest-modules",
 ]
 testpaths = [
@@ -55,7 +55,7 @@ source = "scm"
 
 [tool.pdm.build]
 includes = [
-    "pytemplate/",
+    "pdm_template/",
 ]
 excludes = [
     "tests",
@@ -87,7 +87,7 @@ quality = [
 doc = [
     "pdoc3~=0.10.0",
     "pylint~=2.15.3",
-    "pytemplate>=0.1.0",
+    "pdm_template>=0.1.0",
 ]
 test = [
     "pytest~=7.1.3",
@@ -102,10 +102,10 @@ test = [
 [tool.pdm.scripts]
 site_packages = true
 doc.shell = """\
-    mkdir -p htmldoc/pytemplate
-    pdoc --html --force --config latex_math=True -o htmldoc pytemplate
+    mkdir -p htmldoc/pdm_template
+    pdoc --html --force --config latex_math=True -o htmldoc pdm_template
     coverage html -d htmldoc/coverage --rcfile tests/coverage.conf
-    docstr-coverage pytemplate -miP -sp -is -idel --skip-file-doc --exclude ".*/kt.*.py" --badge=htmldoc/doc_badge.svg
+    docstr-coverage pdm_template -miP -sp -is -idel --skip-file-doc --exclude ".*/kt.*.py" --badge=htmldoc/doc_badge.svg
     coverage-badge -f -o htmldoc/cov_badge.svg
     fix-doc
 """
