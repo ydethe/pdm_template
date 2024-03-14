@@ -1,0 +1,124 @@
+[build-system]
+requires = [
+    "pdm-backend>=2.1.0,<3.0.0",
+    "setuptools>=67.0.0,<69.0.0",
+    {% if is_c_extension %}"pybind11>=2.10.4,<3.0.0",{% endif %}
+    "nuitka",
+    "wheel",
+    "toml"
+]
+build-backend = "pdm.backend"
+
+[project]
+name = "{{repository_name}}"
+dynamic = ["version"]
+description = "{{project_description}}"
+authors = [
+    { name = "{{author_name}}", email = "{{author_email}}" },
+]
+dependencies = [
+    "rich>=13.3",
+    "setuptools-scm>=7.1",
+    "numpy>=1.24.3",
+]
+requires-python = ">={{min_python_version}},<{{max_python_version}}"
+readme = "README.md"
+
+[project.urls]
+"Bug Tracker" = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/issues"
+Homepage = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
+Source = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--html=htmldoc/tests/report.html",
+    "--self-contained-html",
+    "--junitxml=htmldoc/junit.xml",
+    "--cov-config=tests/coverage.conf",
+    "--cov={{python_package_import_name}}",
+    "--doctest-modules",
+    {% if use_pytest_mpl %}"--mpl",
+    "--mpl-generate-summary=html",
+    "--mpl-results-always",
+    "--mpl-baseline-path=tests/baseline",
+    "--mpl-results-path=build/htmldoc/tests/results",{% endif %}
+]
+testpaths = [
+    "tests/",
+]
+
+[tool.pdm.version]
+source = "scm"
+
+[tool.pdm.build]
+{% if is_c_extension %}run-setuptools = true
+{% endif %}excludes = [
+    "tests",
+    "examples",
+    "build",
+    "dev",
+    "dist",
+    "mockup",
+    "ksy"
+]
+editable-backend = "editables"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "coverage-badge>=1.1.0",
+    "docstr-coverage>=2.2.0",
+    "ipython~=7.23.1",
+    "pre-commit",
+    "snakeviz>=2.1.2",
+    {% if is_c_extension %}"pybind11~=2.11",{% endif %}
+]
+maintain = [
+    "black==22.3.0",
+    "blacken-docs==1.12.1",
+    "git-changelog>=1.0",
+]
+quality = [
+    "mypy>=1.2.0",
+    "ruff>=0.0.246",
+]
+doc = [
+    "pdoc3~=0.10.0",
+    "pylint>=2.15.3",
+    "genbadge[all]>=1.1.1,<2.0.0",
+    "docstr-coverage>=2.2.0",
+    "pytemplate>=0.1.0",
+]
+test = [
+    "pytest~=7.1.3",
+    "pytest-cov~=3.0.0",
+    "pytest-mock~=3.8.2",
+    "pytest-instafail~=0.4.2",
+    "pytest-picked~=0.4.6",
+    "pytest-sugar~=0.9.5",
+    "pytest-html~=3.1.1",
+    {% if use_pytest_mpl %}"pytest-mpl~=0.16.1",{% endif %}
+]
+
+[tool.pdm.scripts]
+site_packages = true
+doc.shell = """\
+    mkdir -p htmldoc/{{python_package_import_name}}
+    pdoc --html --force --config latex_math=True -o htmldoc {{python_package_import_name}}
+    coverage html -d htmldoc/coverage --rcfile tests/coverage.conf
+    coverage xml -o htmldoc/coverage/coverage.xml --rcfile tests/coverage.conf
+    docstr-coverage src/{{python_package_import_name}} -miP -sp -is -idel --skip-file-doc --badge=htmldoc/{{python_package_import_name}}/doc_badge.svg
+    genbadge coverage -l -i htmldoc/coverage/coverage.xml -o htmldoc/{{python_package_import_name}}/cov_badge.svg
+    fix-doc
+"""
+{% if use_pytest_mpl %}baseline.shell = "pytest --mpl-generate-path=tests/baseline tests"
+{% endif %}serve = "python3 -m http.server 10124 -d htmldoc"

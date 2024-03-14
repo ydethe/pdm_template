@@ -1,0 +1,45 @@
+{% if is_c_extension %}
+def test_c_add():
+    from {{python_package_import_name}}.hello import add
+
+    assert add(2, 3) == 5
+
+
+def test_c_norm():
+    import numpy as np
+    from {{python_package_import_name}}.hello import norm
+
+    v = np.array([3, 4])
+
+    assert norm(v) == 5
+
+
+def test_c_class():
+    from {{python_package_import_name}}.hello import create_example, Example
+
+    a = create_example()
+    assert a.getResult() == 0
+
+    a.process()
+    assert a.getResult() == 1
+
+    b = Example()
+    assert b.getResult() == 0
+
+    b.process()
+    assert b.getResult() == 1
+{% endif %}
+
+def test_py():
+    from {{python_package_import_name}}.compute import python_add
+
+    assert python_add(2, 3) == 5
+
+
+if __name__ == "__main__":
+{% if is_c_extension %}
+    test_c_add()
+    test_c_norm()
+    test_c_class()
+{% endif %}
+    test_py()

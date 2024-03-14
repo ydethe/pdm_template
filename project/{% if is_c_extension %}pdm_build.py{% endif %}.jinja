@@ -1,0 +1,18 @@
+from pdm.backend.hooks.base import Context
+from pybind11.setup_helpers import Pybind11Extension, ParallelCompile, build_ext
+
+ParallelCompile("NPY_NUM_BUILD_JOBS").install()
+
+def pdm_build_update_setup_kwargs(context: Context, setup_kwargs: dict):
+    if context.target != "sdist":
+        ext_modules = [
+            Pybind11Extension(
+                "{{python_package_import_name}}.hello",
+                ["src/{{python_package_import_name}}/hellomodule.cpp", "src/{{python_package_import_name}}/example.cpp"],
+            )
+        ]
+        setup_kwargs.update(
+            setup_requires=["nuitka", "pybind11"],
+            build_with_nuitka=True,
+            ext_modules=ext_modules,
+        )
