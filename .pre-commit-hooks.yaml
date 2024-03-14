@@ -1,0 +1,16 @@
+# .pre-commit-hooks.yaml
+- id: check-changelog
+  name: check changelog
+  description: check and update CHANGELOG.md file
+  entry: check-changelog
+  language: python
+- id: extract-todo
+  name: extract todo
+  description: extract TODOs and update TODO.md file
+  entry: extract-todo
+  language: python
+- id: fix-doc
+  name: fix documentation
+  description: fix integrity checks in generated html
+  entry: fix-doc
+  language: python
