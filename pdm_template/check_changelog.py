@@ -6,8 +6,6 @@ from argparse import Action
 from git_changelog.cli import build_and_render, get_parser
 
 
-
-
 def create_empty_changelog(changelog_path: Path):
     txt = """# Changelog
 

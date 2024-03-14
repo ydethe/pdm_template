@@ -14,7 +14,7 @@ class Todo:
     text: str
 
 
-def find_todos(repository: Path, exclude: T.List[str]) -> T.List[Todo]:
+def find_todos(repository: Path, exclude: T.List[Path]) -> T.List[Todo]:
     from . import logger
 
     parse_cfg = {
@@ -30,7 +30,7 @@ def find_todos(repository: Path, exclude: T.List[str]) -> T.List[Todo]:
         ".sh": re.compile("^[ \t]*[#;][ ]*todo[: ]", flags=re.IGNORECASE),
     }
 
-    enc_regex = re.compile("coding[=:]\s*([-\w.]+)")
+    enc_regex = re.compile(r"coding[=:]\s*([-\w.]+)")
 
     # TODO: Improve file parsing
     todo_list = list()
@@ -49,7 +49,7 @@ def find_todos(repository: Path, exclude: T.List[str]) -> T.List[Todo]:
 
         to_be_excluded = False
         for ex_path in exclude:
-            if fp.match(ex_path):
+            if fp.resolve().is_relative_to(ex_path):
                 to_be_excluded = True
                 logger.debug(f"File {fp} excluded (matches {ex_path})")
                 break
@@ -97,7 +97,7 @@ def find_todos(repository: Path, exclude: T.List[str]) -> T.List[Todo]:
     return todo_list
 
 
-def build_and_render(repository: Path, output: Path, exclude: T.List[str]):
+def build_and_render(repository: Path, output: Path, exclude: T.List[Path]):
     todo_list = find_todos(repository, exclude=exclude)
 
     # https://github.com/todotxt/todo.txt
@@ -122,7 +122,11 @@ def main(args: T.List[str] = None) -> int:
     if opts.ignore is None:
         exclude = []
     else:
-        exclude = opts.ignore
+        exclude = [
+            Path(p).expanduser().resolve()
+            for p in opts.ignore
+            if Path(p).expanduser().resolve().exists()
+        ]
 
     todo_path = Path("TODO.md")
     todo_path.touch(exist_ok=True)
