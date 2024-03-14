@@ -8,12 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 <!-- insertion marker -->
 ## Unreleased
 
-<small>[Compare with latest](https://github.com/ydethe/pdm_template/compare/v0.1.4...HEAD)</small>
+<small>[Compare with latest](https://github.com/ydethe/pdm_template/compare/v0.1.5...HEAD)</small>
 
 <!-- insertion marker -->
-## [v0.1.4](https://github.com/ydethe/pdm_template/releases/tag/v0.1.4) - 2024-03-14
+## [v0.1.5](https://github.com/ydethe/pdm_template/releases/tag/v0.1.5) - 2024-03-14
 
-<small>[Compare with first commit](https://github.com/ydethe/pdm_template/compare/bbcc10fe2823b9822ace1a50967eeef8059e7d49...v0.1.4)</small>
+<small>[Compare with first commit](https://github.com/ydethe/pdm_template/compare/bbcc10fe2823b9822ace1a50967eeef8059e7d49...v0.1.5)</small>
 
 ### Fixed
 
