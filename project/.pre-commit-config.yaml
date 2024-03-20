@@ -5,7 +5,7 @@ repos:
   - id: extract-todo
     args: [--ignore, __pypackages__, .venv]
   repo: https://github.com/ydethe/pdm_template.git
-  rev: v0.1.4
+  rev: v0.1.5
 
 - hooks:
   - id: check-case-conflict
@@ -44,5 +44,5 @@ repos:
     - pyproject.toml
     id: ruff
   repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.263
-
+  rev: v0.3.3
+  

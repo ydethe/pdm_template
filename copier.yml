@@ -66,14 +66,15 @@ is_c_extension:
 repository_provider:
   type: str
   help: Your repository provider
-  default: https://github.com/
+  default: github.com
 
 repository_namespace:
   type: str
   help: Your repository namespace
+  placeholder: spacex
   validator: >-
       {% if repository_namespace == '' %}
-      You must provide the repository namespace
+      Must indicate git provider namespace
       {% endif %}
 
 repository_name:

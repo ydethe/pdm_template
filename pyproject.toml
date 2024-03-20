@@ -7,7 +7,7 @@ name = "pdm_template"
 dynamic = ["version"]
 description = "A python project template"
 authors = [
-    { name = "Yann de Thé", email = "ydethe@gmail.com" },
+    { name = "Yann de Thé", email = "yann@johncloud.fr" },
 ]
 dependencies = [
     "git-changelog>=1.0",
@@ -15,15 +15,19 @@ dependencies = [
 requires-python = ">=3.8"
 
 [project.urls]
-"Bug Tracker" = "https://github.com/ydethe/pdm_template/issues"
-Homepage = "https://github.com/ydethe/pdm_template"
-Source = "https://github.com/ydethe/pdm_template"
+"Bug Tracker" = "https://gitlab.com/ydethe/pdm-copier/issues"
+Homepage = "https://gitlab.com/ydethe/pdm-copier"
+Source = "https://gitlab.com/ydethe/pdm-copier"
+
+[tool.pylint.main]
+ignore-patterns = ["kt_*.py"]
 
 [tool.pylint.format]
 max-line-length = 100
 
 [tool.black]
 line-length = 100
+force-exclude = 'kt_.*.py'
 
 [project.scripts]
 check-changelog = "pdm_template.check_changelog:main"
@@ -32,6 +36,9 @@ fix-doc = "pdm_template.fix_doc:main"
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.per-file-ignores]
+"GNSScodegen.py" = ["E501"]
 
 [tool.pytest.ini_options]
 addopts = [
@@ -65,7 +72,6 @@ editable-backend = "editables"
 [tool.pdm.dev-dependencies]
 dev = [
     "coverage-badge>=1.1.0",
-    "docstr-coverage>=2.2.0",
     "ipython~=7.23.1",
     "pre-commit",
     "snakeviz>=2.1.2",
@@ -80,8 +86,7 @@ quality = [
 ]
 doc = [
     "pdoc3~=0.10.0",
-    "pylint~=2.15.3",
-    "pdm_template>=0.1.4",
+    "pdm-copier>=0.9.12",
 ]
 test = [
     "pytest~=7.1.3",

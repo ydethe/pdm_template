@@ -60,6 +60,9 @@ testpaths = [
 [tool.pdm.version]
 source = "scm"
 
+[tool.pdm.options]
+add = ["--save-compatible"]
+
 [tool.pdm.build]
 {% if is_c_extension %}run-setuptools = true
 {% endif %}excludes = [
@@ -76,7 +79,6 @@ editable-backend = "editables"
 [tool.pdm.dev-dependencies]
 dev = [
     "coverage-badge>=1.1.0",
-    "docstr-coverage>=2.2.0",
     "ipython~=7.23.1",
     "pre-commit",
     "snakeviz>=2.1.2",
@@ -93,10 +95,9 @@ quality = [
 ]
 doc = [
     "pdoc3~=0.10.0",
-    "pylint>=2.15.3",
     "genbadge[all]>=1.1.1,<2.0.0",
     "docstr-coverage>=2.2.0",
-    "pdm_template>=0.1.4",
+    "pdm-copier>=0.9.12",
 ]
 test = [
     "pytest~=7.1.3",

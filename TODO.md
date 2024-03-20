@@ -1,1 +1,1 @@
-- [src/pdm_template/extract_todo.py#L35](src/pdm_template/extract_todo.py#L35): Improve file parsing
+- [src/pdm_copier/extract_todo.py#L35](src/pdm_copier/extract_todo.py#L35): Improve file parsing
