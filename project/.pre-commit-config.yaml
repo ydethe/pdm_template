@@ -3,9 +3,9 @@ repos:
   - id: check-changelog
     args: [--version-regex, '<a href="[^"]+">(?P<version>[^<]+)', --bump=auto, -t, keepachangelog]
   - id: extract-todo
-    args: [--ignore, __pypackages__, .venv]
-  repo: https://git.aes.alcatel.fr:8443/scm/dnfsnd/python-tas-template.git
-  rev: v0.10.1
+    args: [--ignore, src/cpp/**/*]
+  repo: https://github.com/ydethe/pdm_template.git
+  rev: v0.1.6
 
 - hooks:
   - id: check-case-conflict
