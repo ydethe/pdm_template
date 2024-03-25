@@ -37,7 +37,7 @@ author_name:
 author_email:
     type: str
     help: What is the email of the author?
-    placeholder: elon.musk@thalesaleniaspace.com
+    placeholder: elon.musk@spacex.com
     validator: >-
         {% if author_email == '' %}
         Author must have an email
@@ -71,12 +71,16 @@ is_obfuscated:
 repository_provider:
   type: str
   help: Your repository provider
-  default: git.aes.alcatel.fr:8443
+  default: https://github.com/
 
 repository_namespace:
   type: str
   help: Your repository namespace
-  default: projects/DNFSND/repos
+  placeholder: spacex
+  validator: >-
+      {% if repository_namespace == '' %}
+      You must provide your namespace
+      {% endif %}
 
 repository_name:
   type: str

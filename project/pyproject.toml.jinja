@@ -65,14 +65,6 @@ add = ["--save-compatible"]
 
 [tool.pdm.build]
 {% if is_c_extension %}run-setuptools = true{% endif %}
-{% if is_obfuscated %}
-includes = [
-    "*.c",
-    "*.h",
-    "*.cpp",
-    "*.hpp",
-    "*.py"
-]{% endif %}
 excludes = [
     ".gitignore",
     "pdm_build.py",
@@ -82,7 +74,12 @@ excludes = [
     "dev",
     "dist",
     "mockup",
-    "ksy"
+    "ksy"{% if is_obfuscated %},
+    "**/*.py",
+    "**/*.cpp",
+    "**/*.hpp",
+    "**/*.c",
+    "**/*.h"{% endif %}
 ]
 editable-backend = "editables"
 
