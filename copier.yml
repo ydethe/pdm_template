@@ -37,7 +37,7 @@ author_name:
 author_email:
     type: str
     help: What is the email of the author?
-    placeholder: elon.musk@spacex.com
+    placeholder: elon.musk@thalesaleniaspace.com
     validator: >-
         {% if author_email == '' %}
         Author must have an email
@@ -63,19 +63,20 @@ is_c_extension:
     default: false
     help: Will you mix python and C/C++?
 
+is_obfuscated:
+    type: bool
+    default: false
+    help: Do you want to obfuscate your code?
+
 repository_provider:
   type: str
   help: Your repository provider
-  default: github.com
+  default: git.aes.alcatel.fr:8443
 
 repository_namespace:
   type: str
   help: Your repository namespace
-  placeholder: spacex
-  validator: >-
-      {% if repository_namespace == '' %}
-      Must indicate git provider namespace
-      {% endif %}
+  default: projects/DNFSND/repos
 
 repository_name:
   type: str
