@@ -16,6 +16,7 @@ sources = sorted(
 headers_dirs = set()
 for h in list(package_root.rglob("*.h")) + list(package_root.rglob("*.hpp")):
     headers_dirs.add(str(h.parent))
+    headers_dirs.add(str(h.parent.parent))
 headers_dirs = list(headers_dirs)
 
 
