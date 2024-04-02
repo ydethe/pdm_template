@@ -12,7 +12,9 @@ sources = [str(f) for f in package_root.rglob("*.cpp")] + [
 headers = list(
     set(
         [str(f.parent) for f in package_root.rglob("*.hpp")]
+        +[str(f.parent.parent) for f in package_root.rglob("*.hpp")]
         + [str(f.parent) for f in package_root.rglob("*.h")]
+        + [str(f.parent.parent) for f in package_root.rglob("*.h")]
     )
 )
 
