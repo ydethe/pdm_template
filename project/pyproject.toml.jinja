@@ -2,12 +2,13 @@
 requires = [
     "pdm-backend>=2.1.0,<3.0.0",
     "setuptools>=67.0.0,<69.0.0",
-    {% if is_c_extension %}"pybind11>=2.10.4,<3.0.0",{% endif %}
-    "nuitka",
-    "wheel",
+    {% if is_c_extension %}"pybind11>=2.10.4,<3.0.0",
+    {% endif %}{% if is_obfuscated %}"nuitka",
+    {% endif %}"wheel",
     "toml"
 ]
-build-backend = "pdm.backend"
+{% if is_obfuscated and not is_c_extension %}build-backend = "nuitka.distutils.Build"
+{% else %}build-backend = "pdm.backend"{% endif %}
 
 [project]
 name = "{{repository_name}}"
@@ -17,9 +18,8 @@ authors = [
     { name = "{{author_name}}", email = "{{author_email}}" },
 ]
 dependencies = [
-    "rich>=13.3",
-    "setuptools-scm>=7.1",
-    "numpy>=1.24.3",
+    "numpy~=1.26.4",
+    "rich~=13.7.1"
 ]
 requires-python = ">={{min_python_version}},<{{max_python_version}}"
 readme = "README.md"
@@ -64,15 +64,22 @@ source = "scm"
 add = ["--save-compatible"]
 
 [tool.pdm.build]
-{% if is_c_extension %}run-setuptools = true
-{% endif %}excludes = [
+{% if is_c_extension %}run-setuptools = true{% endif %}
+excludes = [
+    ".gitignore",
+    "pdm_build.py",
     "tests",
     "examples",
     "build",
     "dev",
     "dist",
     "mockup",
-    "ksy"
+    "ksy"{% if is_obfuscated %},
+    "**/*.py",
+    "**/*.cpp",
+    "**/*.hpp",
+    "**/*.c",
+    "**/*.h"{% endif %}
 ]
 editable-backend = "editables"
 
@@ -97,7 +104,7 @@ doc = [
     "pdoc3~=0.10.0",
     "genbadge[all]>=1.1.1,<2.0.0",
     "docstr-coverage>=2.2.0",
-    "pdm-copier>=0.9.12",
+    "pdm_template>=0.1.8",
 ]
 test = [
     "pytest~=7.1.3",

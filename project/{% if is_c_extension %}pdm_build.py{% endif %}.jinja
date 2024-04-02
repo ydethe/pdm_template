@@ -2,21 +2,19 @@ from pathlib import Path
 from pdm.backend.hooks.base import Context
 from pybind11.setup_helpers import Pybind11Extension, ParallelCompile, build_ext
 
+
 ParallelCompile("NPY_NUM_BUILD_JOBS").install()
 
 package_root = Path("src/cpp")
-sources = [str(f) for f in package_root.rglob("*.cpp")] + [
-    str(f) for f in package_root.rglob("*.c")
-]
 
-headers = list(
-    set(
-        [str(f.parent) for f in package_root.rglob("*.hpp")]
-        +[str(f.parent.parent) for f in package_root.rglob("*.hpp")]
-        + [str(f.parent) for f in package_root.rglob("*.h")]
-        + [str(f.parent.parent) for f in package_root.rglob("*.h")]
-    )
-)
+sources=list(package_root.rglob("*.c")) + list(package_root.rglob("*.cpp"))
+
+# Finding all directory where header files are
+headers_dirs = set()
+for h in list(package_root.rglob("*.h")) + list(package_root.rglob("*.hpp")):
+    headers_dirs.add(str(h.parent))
+    headers_dirs.add(str(h.parent.parent))
+headers_dirs = list(headers_dirs)
 
 
 def pdm_build_update_setup_kwargs(context: Context, setup_kwargs: dict):
@@ -24,10 +22,10 @@ def pdm_build_update_setup_kwargs(context: Context, setup_kwargs: dict):
         module = Pybind11Extension(
             "{{python_package_import_name}}.hello",
             sources=sources,
-            include_dirs=headers
+            include_dirs=headers_dirs,
         )
         setup_kwargs.update(
-            setup_requires=["nuitka", "pybind11"],
-            build_with_nuitka=True,
-            ext_modules=[module],
+            setup_requires=[{% if is_obfuscated %}"nuitka", {% endif %}"pybind11"],
+            {% if is_obfuscated %}build_with_nuitka=True,
+            {% endif %}ext_modules=[module],
         )

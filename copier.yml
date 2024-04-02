@@ -63,10 +63,15 @@ is_c_extension:
     default: false
     help: Will you mix python and C/C++?
 
+is_obfuscated:
+    type: bool
+    default: false
+    help: Do you want to obfuscate your code?
+
 repository_provider:
   type: str
   help: Your repository provider
-  default: github.com
+  default: https://github.com/
 
 repository_namespace:
   type: str
@@ -74,7 +79,7 @@ repository_namespace:
   placeholder: spacex
   validator: >-
       {% if repository_namespace == '' %}
-      Must indicate git provider namespace
+      You must provide your namespace
       {% endif %}
 
 repository_name:

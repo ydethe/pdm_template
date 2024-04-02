@@ -44,7 +44,7 @@ git config --global pull.rebase true
 To create a project, type:
 
 ```bash
-copier copy --trust https://github.com/ydethe/pdm_template.git /path/to/your/new/project
+copier copy --trust gh:ydethe/pdm_template.git /path/to/your/new/project
 ```
 
 See the [documentation](https://copier.readthedocs.io/en/stable/)

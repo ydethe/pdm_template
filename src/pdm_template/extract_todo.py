@@ -34,17 +34,8 @@ def find_todos(repository: Path, exclude: T.List[Path]) -> T.List[Todo]:
 
     # TODO: Improve file parsing
     todo_list = list()
-    for fp in repository.rglob("*"):
-        ext = fp.suffix
-
-        com_regex = parse_cfg.get(ext, None)
-        if com_regex is None:
-            continue
-
+    for fp in repository.glob("./src/**/*"):
         if not fp.is_file():
-            continue
-
-        if fp.parts[0].startswith("."):
             continue
 
         to_be_excluded = False
@@ -55,6 +46,16 @@ def find_todos(repository: Path, exclude: T.List[Path]) -> T.List[Todo]:
                 break
 
         if to_be_excluded:
+            continue
+
+        ext = fp.suffix
+
+        com_regex = parse_cfg.get(ext, None)
+        if com_regex is None:
+            logger.debug(f"Skipping extension {ext} ({fp})")
+            continue
+
+        if fp.parts[0].startswith("."):
             continue
 
         line = ""
@@ -80,18 +81,21 @@ def find_todos(repository: Path, exclude: T.List[Path]) -> T.List[Todo]:
                     else:
                         enc = "utf-8"
 
-            except Exception:
+            except Exception as e:
                 pass
 
         if enc is None:
+            logger.error(f"enc=={enc}")
             continue
 
         line = ""
         with open(fp, encoding=enc) as f:
+            logger.debug(f"Analysing {fp} for TODO")
             for ln, line in enumerate(f.readlines()):
                 m = com_regex.split(line, maxsplit=100)
                 if len(m) >= 2:
                     t = Todo(fp, ln + 1, m[1].strip())
+                    logger.debug(f"Found TODO: {t}")
                     todo_list.append(t)
 
     return todo_list
