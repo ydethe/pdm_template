@@ -81,7 +81,7 @@ def find_todos(repository: Path, exclude: T.List[Path]) -> T.List[Todo]:
                     else:
                         enc = "utf-8"
 
-            except Exception as e:
+            except Exception:
                 pass
 
         if enc is None:
@@ -151,7 +151,7 @@ def main(args: T.List[str] = None) -> int:
         with open(temp_file, "r") as fp:
             new_todo = fp.read()
 
-    if new_todo != old_todo:
+    if new_todo != old_todo and len(new_todo) > 0:
         retval = 1
         with open(todo_path, "w") as f:
             f.write(new_todo)
