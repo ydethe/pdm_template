@@ -1,0 +1,17 @@
+[phases.install]
+aptPkgs = ["...", "python3-pip"]
+
+# Install uv and sync dependencies
+cmds = [
+  "curl -LsSf https://astral.sh/uv/install.sh | sh",
+  "PDM_BUILD_SCM_VERSION=1.0.0 uv sync --frozen --no-dev"
+]
+
+# Cache uv directories for faster rebuilds
+cacheDirectories = ["~/.cache/uv", ".venv"]
+
+[start]
+cmd = "PDM_BUILD_SCM_VERSION=1.0.0 uv run uvicorn {{repository_name}}:app --host 0.0.0.0 --port 3000"
+
+# nixpacks build . -t my-app
+# sudo docker run -p 3000:3000 my-app
